@@ -87,6 +87,12 @@ def reshape_classifier_output(model, n=1000):
 
 @contextmanager
 def torch_distributed_zero_first(local_rank: int):
+    """train.py
+        用于处理模型进行分布式训练时同步问题
+        基于torch.distributed.barrier()函数的上下文管理器，为了完成数据的正常同步操作（yolov5中拥有大量的多线程并行操作）
+        Decorator to make all processes in distributed training wait for each local_master to do something.
+        :params local_rank: 代表当前进程号  0代表主进程  1、2、3代表子进程
+        """
     # Decorator to make all processes in distributed training wait for each local_master to do something
     if local_rank not in [-1, 0]:
         dist.barrier(device_ids=[local_rank])

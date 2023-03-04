@@ -12,7 +12,7 @@ class Callbacks:
     """
 
     def __init__(self):
-        # Define the available callbacks
+        # Define the available callbacks 用字典储存不同hook的callback列表
         self._callbacks = {
             'on_pretrain_routine_start': [],
             'on_pretrain_routine_end': [],
@@ -38,7 +38,7 @@ class Callbacks:
     def register_action(self, hook, name='', callback=None):
         """
         Register a new action to a callback hook
-
+        在列表中注册callback的信息
         Args:
             hook: The callback hook name to register the action to
             name: The name of the action for later reference
@@ -51,7 +51,7 @@ class Callbacks:
     def get_registered_actions(self, hook=None):
         """"
         Returns all the registered actions by callback hook
-
+        获取莫一种hook的列表
         Args:
             hook: The name of the hook to check, defaults to all
         """
@@ -60,7 +60,7 @@ class Callbacks:
     def run(self, hook, *args, thread=False, **kwargs):
         """
         Loop through the registered actions and fire all callbacks on main thread
-
+        判断是否开启线程 并执行callback
         Args:
             hook: The name of the hook to check, defaults to all
             args: Arguments to receive from YOLOv5
@@ -68,9 +68,10 @@ class Callbacks:
             kwargs: Keyword Arguments to receive from YOLOv5
         """
 
-        assert hook in self._callbacks, f"hook '{hook}' not found in callbacks {self._callbacks}"
+        assert hook in self._callbacks, f"hook '{hook}' not found in callbacks {self._callbacks}" # 为；false时执行
         for logger in self._callbacks[hook]:
             if thread:
+                # 需要开启线程时开启
                 threading.Thread(target=logger['callback'], args=args, kwargs=kwargs, daemon=True).start()
             else:
                 logger['callback'](*args, **kwargs)

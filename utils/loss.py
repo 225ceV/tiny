@@ -9,12 +9,12 @@ import torch.nn as nn
 from utils.metrics import bbox_iou
 from utils.torch_utils import de_parallel
 
-
+# label smoothing一种对标签处理来增加泛化能力的trick，BCE binary cross entropy二分类交叉熵
 def smooth_BCE(eps=0.1):  # https://github.com/ultralytics/yolov3/issues/238#issuecomment-598028441
     # return positive, negative label smoothing BCE targets
     return 1.0 - 0.5 * eps, 0.5 * eps
 
-
+# 类似CrossEntropyLoss计算将softmax计算和entropy loss计算合一
 class BCEBlurWithLogitsLoss(nn.Module):
     # BCEwithLogitLoss() with reduced missing label effects.
     def __init__(self, alpha=0.05):

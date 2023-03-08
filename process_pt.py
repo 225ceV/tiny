@@ -3,6 +3,8 @@ from models.yolo import Model   # 定义的model类 从detectionModel继承, cfg
 from copy import deepcopy
 from utils.torch_utils import de_parallel
 
+nc = 80
+
 weights = 'yolov5s.pt'
 ckpt = torch.load(weights)
 # print(type(ckpt['model']))
@@ -19,15 +21,15 @@ csd = ckpt['model'].float().state_dict()
 yolo5s5lold.load_state_dict(csd, strict=False)  # load
 print(f'Transferred {len(csd)}/{len(yolo5s5lold.state_dict())} items from {weights}')  # report
 
-# process
-yolo5s5h = Model('models/tiny/yolov5s5h.yaml')
+# process 通过改变yolov5s5hold结构到yolov5s5h结构
+yolo5s5h = Model('models/tiny/yolov5s5h.yaml', nc=nc)
 print('========= before process =========')
 # print(yolo5s5lold.model[40])
-yolo5s5lold.model[40] = yolo5s5h.model[40]  # random
-yolo5s5lold.model[0] = yolov5s.model[0]
-yolo5s5lold.model[4] = yolov5s.model[4]
-yolo5s5lold.model[10] = yolov5s.model[8]
-yolo5s5lold.model[11] = yolov5s.model[9]
+yolo5s5lold.model[40] = deepcopy(yolo5s5h.model[40])  # random
+yolo5s5lold.model[0] = deepcopy(yolov5s.model[0])
+yolo5s5lold.model[4] = deepcopy(yolov5s.model[4])
+yolo5s5lold.model[10] = deepcopy(yolov5s.model[8])
+yolo5s5lold.model[11] = deepcopy(yolov5s.model[9])
 # print(yolo5s5lold.model[40])
 
 # save

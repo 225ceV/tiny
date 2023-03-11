@@ -1,0 +1,26 @@
+#为了更有针对性地训练和评价模型对小目标的识别能力，本文对大型数据库中的数据类别进行了筛选，
+#不再使用全部的80类，而是选取其中的部分类别图片构成一个子数据库tiny-coco。
+#我记录了coco数据库标签中目标尺寸小于8*8的图片的类别分布和各个类别的目标总数，对各个类别小目标占全部目标的比重进行了排序。
+#选出了比重高的5类，分别是：球类、鸟、交通信号灯、风筝和手机。
+#由这5类对象来构成tiny-coco数据集，其中训练数据包含18367张图片，验证数据包含779张图片。
+
+# Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
+path: ../datasets/VOC
+train: # train images (relative to 'path')  16551 images
+  - images/train2012
+  - images/train2007
+  - images/val2012
+  - images/val2007
+val: # val images (relative to 'path')  4952 images
+  - images/test2007
+test: # test images (optional)
+  - images/test2007
+
+# Classes
+nc: 5
+names:
+  9: traffic light
+  14: bird
+  32: sports ball
+  33: kite
+  67: cell phone

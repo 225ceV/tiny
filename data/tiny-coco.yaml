@@ -13,7 +13,7 @@ val: # val images (relative to 'path')  779 images
 
 # Classes
 nc: 5
-names:
+name:
 ## coco label
 #  9: traffic light
 #  14: bird

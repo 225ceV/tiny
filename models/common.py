@@ -351,7 +351,7 @@ class WindowAttention(nn.Module):
         # x = (attn.float() @ v.float()).transpose(1, 2).reshape(B_, N, C)
         x = (attn @ v).transpose(1, 2).reshape(B_, N, C)
         # x.to(torch.float16)
-        print(x.dtype)
+        # print(x.dtype)
         x = self.proj(x)
         x = self.proj_drop(x)
         return x

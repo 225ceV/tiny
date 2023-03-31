@@ -313,12 +313,17 @@ class WindowAttention(nn.Module):
         # permute: -> [3, batch_size*num_windows, num_heads, Mh*Mw, embed_dim_per_head]
         qkv = self.qkv(x).reshape(B_, N, 3, self.num_heads, C // self.num_heads).permute(2, 0, 3, 1, 4)
         # [batch_size*num_windows, num_heads, Mh*Mw, embed_dim_per_head]
-        q, k, v = qkv.unbind(0)  # make torchscript happy (cannot use tensor as tuple)
+        q, k, v = qkv.unbind(0) # make torchscript happy (cannot use tensor as tuple)
 
+        # 对应注意力机制的公式
         # transpose: -> [batch_size*num_windows, num_heads, embed_dim_per_head, Mh*Mw]
         # @: multiply -> [batch_size*num_windows, num_heads, Mh*Mw, Mh*Mw]
+        # v = v.to(torch.float32)
+        # k = k.to(torch.float32)
+        # q = q.to(torch.float32)
         q = q * self.scale
         attn = (q @ k.transpose(-2, -1))
+
 
         # relative_position_bias_table.view: [Mh*Mw*Mh*Mw,nH] -> [Mh*Mw,Mh*Mw,nH]
         relative_position_bias = self.relative_position_bias_table[self.relative_position_index.view(-1)].view(
@@ -342,7 +347,11 @@ class WindowAttention(nn.Module):
         # @: multiply -> [batch_size*num_windows, num_heads, Mh*Mw, embed_dim_per_head]
         # transpose: -> [batch_size*num_windows, Mh*Mw, num_heads, embed_dim_per_head]
         # reshape: -> [batch_size*num_windows, Mh*Mw, total_embed_dim]
+        # print(attn.dtype, v.dtype)
+        # x = (attn.float() @ v.float()).transpose(1, 2).reshape(B_, N, C)
         x = (attn @ v).transpose(1, 2).reshape(B_, N, C)
+        # x.to(torch.float16)
+        print(x.dtype)
         x = self.proj(x)
         x = self.proj_drop(x)
         return x
@@ -377,7 +386,7 @@ class SwinTransformerLayer(nn.Module):
         Wp = int(np.ceil(W / self.window_size)) * self.window_size
         # 拥有和feature map一样的通道排列顺序，方便后续window_partition
         img_mask = torch.zeros((1, Hp, Wp, 1), device=x.device)  # [1, Hp, Wp, 1]
-        h_slices = ((0, -self.window_size),
+        h_slices = (slice(0, -self.window_size),
                     slice(-self.window_size, -self.shift_size),
                     slice(-self.shift_size, None))
         w_slices = (slice(0, -self.window_size),
@@ -395,6 +404,8 @@ class SwinTransformerLayer(nn.Module):
         # [nW, Mh*Mw, Mh*Mw]
         attn_mask = attn_mask.masked_fill(attn_mask != 0, torch.tensor(-100.0)).masked_fill(attn_mask == 0,
                                                                                             torch.tensor(0.0))
+        # torch.set_printoptions(profile="full")
+        # print(attn_mask.shape)
         return attn_mask
 
     def forward(self, x):

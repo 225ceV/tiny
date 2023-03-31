@@ -10,6 +10,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 import torch
+import pandas as pd
 
 from utils import TryExcept, threaded
 
@@ -87,6 +88,15 @@ def ap_per_class(tp, conf, pred_cls, target_cls, plot=False, save_dir='.', names
         plot_mc_curve(px, f1, Path(save_dir) / f'{prefix}F1_curve.png', names, ylabel='F1')
         plot_mc_curve(px, p, Path(save_dir) / f'{prefix}P_curve.png', names, ylabel='Precision')
         plot_mc_curve(px, r, Path(save_dir) / f'{prefix}R_curve.png', names, ylabel='Recall')
+        data_pr = np.c_[
+            px.reshape(1000, 1),
+            np.array(py).reshape(1000, 1),
+            f1.reshape(1000, 1),
+            p.reshape(1000, 1),
+            r.reshape(1000, 1)
+        ]
+        pr_points = pd.DataFrame(columns=['px', 'py', 'f1', 'p', 'r'], data=data_pr)
+        pr_points.to_csv(Path(save_dir) / f'{prefix}pr_points.csv')
 
     i = smooth(f1.mean(0), 0.1).argmax()  # max F1 index
     p, r, f1 = p[:, i], r[:, i], f1[:, i]

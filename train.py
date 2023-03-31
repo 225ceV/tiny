@@ -354,7 +354,7 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
                 results, maps, _ = validate.run(data_dict,
                                                 batch_size=batch_size // WORLD_SIZE * 2,
                                                 imgsz=imgsz,
-                                                half=amp,
+                                                # half=amp,
                                                 model=ema.ema,
                                                 single_cls=single_cls,
                                                 dataloader=val_loader,

@@ -28,7 +28,7 @@ from utils.general import LOGGER, check_version, check_yaml, make_divisible, pri
 from utils.plots import feature_visualization
 from utils.torch_utils import (fuse_conv_and_bn, initialize_weights, model_info, profile, scale_img, select_device,
                                time_sync)
-
+import models.global_var as global_var
 try:
     import thop  # for FLOPs computation
 except ImportError:
@@ -77,8 +77,10 @@ class Detect(nn.Module):
                     y = torch.cat((xy, wh, conf), 4)
                 z.append(y.view(bs, self.na * nx * ny, self.no))
                 logits_.append(logits.view(bs, -1, self.no - 5))  # 修改---3
-        # return x if self.training else (torch.cat(z, 1),) if self.export else (torch.cat(z, 1), x)
-        return x if self.training else (torch.cat(z, 1), torch.cat(logits_, 1), x)
+        draw_gradcam = global_var.get_value("draw_gradcam")
+        if draw_gradcam:
+            return x if self.training else (torch.cat(z, 1), torch.cat(logits_, 1), x)
+        return x if self.training else (torch.cat(z, 1),) if self.export else (torch.cat(z, 1), x)
     def _make_grid(self, nx=20, ny=20, i=0, torch_1_10=check_version(torch.__version__, '1.10.0')):
         d = self.anchors[i].device
         t = self.anchors[i].dtype

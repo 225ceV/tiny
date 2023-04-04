@@ -206,7 +206,7 @@ def run(
 
         # Inference
         with dt[1]:
-            preds, train_out = model(im) if compute_loss else (model(im, augment=augment), None)
+            preds, train_out= model(im) if compute_loss else (model(im, augment=augment), None)
 
         # Loss
         if compute_loss:

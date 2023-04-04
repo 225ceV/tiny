@@ -8,9 +8,13 @@ import torch
 from models.gradcam import YOLOV5GradCAM, YOLOV5GradCAMPP
 from models.yolov5_object_detector import YOLOV5TorchObjectDetector
 import cv2
-test = 'cbam'
+import models.global_var as global_var
+global_var._init()
+global_var.set_value("draw_gradcam", True)
+test = 'yolov5s'
 # Arguments
 parser = argparse.ArgumentParser()
+
 if test == 'cbam':
     parser.add_argument('--data', type=str, default="wheat-det", help='to get cls name')
     parser.add_argument('--cfg', type=str, default='yolov5l-p2-cbam', help='to get target-layer')

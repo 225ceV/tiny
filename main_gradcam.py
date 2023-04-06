@@ -11,10 +11,15 @@ import cv2
 import models.global_var as global_var
 global_var._init()
 global_var.set_value("draw_gradcam", True)
-test = 'yolov5s'
+test = 'tph'
 # Arguments
 parser = argparse.ArgumentParser()
-
+if test == "tph":
+    parser.add_argument('--data', type=str, default="wheat-det", help='to get cls name')
+    parser.add_argument('--cfg', type=str, default='yolov5l-p2-tph', help='to get target-layer')
+    parser.add_argument('--model-path', type=str, default="weights/wheat-det/tph.pt", help='Path to the model')
+    parser.add_argument('--img-path', type=str, default='test_img/2fd875eaa.jpg', help='input image path')
+    parser.add_argument('--img-size', type=int, default=1024, help="input image size")
 if test == 'cbam':
     parser.add_argument('--data', type=str, default="wheat-det", help='to get cls name')
     parser.add_argument('--cfg', type=str, default='yolov5l-p2-cbam', help='to get target-layer')
@@ -68,16 +73,26 @@ elif args.data == "tiny-coco":
 elif args.data == "wheat-det":
     names = ['*']
 
+if args.cfg == 'yolv5l-p2-tph':
+    target_layers = ['model/21/cv3/act', 'model/24/cv3/act', 'model/27/cv3/act', 'model/30/cv3/act']
+
 if args.cfg == 'yolov5s':
     # yolov5s网络中的三个detect层
     target_layers = ['model/17/cv3/act', 'model/20/cv3/act', 'model/23/cv3/act']
-elif args.cfg == 'yolo5l-p2p6':
+    # target_layers = ['model/9/cv2/act']
+if args.cfg == 'yolov5l':
+    # target_layers = ['model/17/cv3/act', 'model/20/cv3/act', 'model/23/cv3/act']
+    target_layers = ['model/9/cv2/act']
+
+elif args.cfg == 'yolov5l-p2p6':
+
     target_layers = ['model/27/cv3/act', 'model/30/cv3/act', 'model/33/cv3/act', 'model/36/cv3/act', 'model/39/cv3/act']
-elif args.cfg == 'yolo5l-p2':
+elif args.cfg == 'yolov5l-p2':
     target_layers = ['model/21/cv3/act', 'model/24/cv3/act', 'model/27/cv3/act', 'model/30/cv3/act']
 elif args.cfg == 'yolov5l-p2-cbam':
     # 22, 26, 30, 34
     target_layers = ['model/34/spatial_attention/sigmoid']
+    # target_layers = ['model/33/cv3/act']
 def get_res_img(mask, res_img):
     mask = mask.squeeze(0).mul(255).add_(0.5).clamp_(0, 255).permute(1, 2, 0).detach().cpu().numpy().astype(np.uint8)
     # mask = (mask - mask.min()) / (mask.max() - mask.min()) * 255
@@ -157,6 +172,7 @@ def main(img_path):
     model = YOLOV5TorchObjectDetector(args.model_path, device, img_size=input_size, names=names)
     # img[..., ::-1]: BGR --> RGB
     # (480, 640, 3) --> (1, 3, 480, 640)
+    print(model)
     torch_img = model.preprocessing(img[..., ::-1])
     tic = time.time()
     # 遍历所有检测层

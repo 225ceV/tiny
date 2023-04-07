@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-04-07T07:45:42.385Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="mVhvPNND6dy7eoqlJoLP" version="21.1.4" type="github" pages="8">
+<mxfile host="app.diagrams.net" modified="2023-04-07T07:53:49.639Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36" etag="TflO3fDJ39XZr3F3wcxb" version="21.1.4" type="github" pages="8">
   <diagram id="GJlDIFFBztXIJ6X1yWX1" name="CV">
     <mxGraphModel dx="1368" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
       <root>
@@ -642,7 +642,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="fg1EY1T_0JXSwWnXIGvP" name="simple">
-    <mxGraphModel dx="1368" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1368" dy="725" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -797,7 +797,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="7NSNqMm-fuGsqaY7Nyin" name="p2">
-    <mxGraphModel dx="1368" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1368" dy="725" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -819,8 +819,17 @@
         <mxCell id="WEyzdWsap2xUFbYPE3M8-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" source="WEyzdWsap2xUFbYPE3M8-7" target="WEyzdWsap2xUFbYPE3M8-12">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="WEyzdWsap2xUFbYPE3M8-7" value="&lt;font style=&quot;font-size: 16px;&quot; face=&quot;Comic Sans MS&quot;&gt;&lt;b&gt;backbone&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;sketch=1;curveFitting=1;jiggle=2;fontColor=#333333;" vertex="1" parent="1">
-          <mxGeometry x="35" y="320" width="210" height="410" as="geometry" />
+        <mxCell id="z48bpD57g3gb1S2czjKL-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;sketch=1;curveFitting=1;jiggle=2;" edge="1" parent="1" target="WEyzdWsap2xUFbYPE3M8-59">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="240" y="360" as="sourcePoint" />
+            <Array as="points">
+              <mxPoint x="290" y="360" />
+              <mxPoint x="290" y="268" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="WEyzdWsap2xUFbYPE3M8-7" value="&lt;font style=&quot;font-size: 16px;&quot; face=&quot;Comic Sans MS&quot;&gt;&lt;b&gt;backbone&lt;/b&gt;&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontColor=#333333;glass=0;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="40" y="320" width="200" height="410" as="geometry" />
         </mxCell>
         <mxCell id="WEyzdWsap2xUFbYPE3M8-8" value="" style="group;sketch=1;curveFitting=1;jiggle=2;" vertex="1" connectable="0" parent="1">
           <mxGeometry x="320" y="610" width="120" height="110" as="geometry" />
@@ -1001,6 +1010,9 @@
         </mxCell>
         <mxCell id="LYq4kLlAUoGQIL8VsO6B-3" value="&lt;font style=&quot;font-size: 13px;&quot; face=&quot;Comic Sans MS&quot;&gt;yolo.detect&lt;/font&gt;" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
           <mxGeometry x="660" y="192.5" width="77" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="z48bpD57g3gb1S2czjKL-2" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;&lt;font style=&quot;font-size: 20px;&quot; face=&quot;Courier New&quot;&gt;P2&lt;/font&gt;&lt;/span&gt;" style="text;strokeColor=none;fillColor=none;html=1;fontSize=24;fontStyle=1;verticalAlign=middle;align=center;sketch=1;curveFitting=1;jiggle=2;" vertex="1" parent="1">
+          <mxGeometry x="226" y="290" width="100" height="40" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>

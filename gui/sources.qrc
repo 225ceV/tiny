@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="image">
+    <file>icon/glass_icon.jpg</file>
+  </qresource>
+</RCC>

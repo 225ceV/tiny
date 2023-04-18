@@ -11,7 +11,7 @@ import cv2
 import models.global_var as global_var
 global_var._init()
 global_var.set_value("draw_gradcam", True)
-test = 'tph'
+test = 'yolov5s'
 # Arguments
 parser = argparse.ArgumentParser()
 if test == "tph":

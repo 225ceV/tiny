@@ -138,5 +138,5 @@ if __name__ == "__main__":
     classcounter[:,2] = classcounter[:,1]/classcounter[:,0]
     table = pd.DataFrame(data=classcounter, index=coco_classes, columns=['all', 'tiny_obj', 'tiny_rate'])
     table.sort_values(by=['tiny_rate', 'tiny_obj'], ascending=False, inplace=True)
-    filepath = os.path.join(current_root, "hist", f"{limit}.csv")
+    filepath = os.path.join(current_root, "../hist", f"{limit}.csv")
     table.to_csv(filepath)

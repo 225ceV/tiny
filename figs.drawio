@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-05-03T21:09:50.625Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="EizslHOi6Lpc-Sb6jLRL" version="21.2.4" type="github" pages="20">
+<mxfile host="app.diagrams.net" modified="2023-05-03T21:11:08.056Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36" etag="MmBSadfiQtJSCJznWIct" version="21.2.4" type="github" pages="20">
   <diagram id="iaM-Xp2Bf-JShTu00IAv" name="ch1-conclusion">
     <mxGraphModel dx="1368" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1600" math="0" shadow="0">
       <root>
@@ -3062,7 +3062,7 @@
     </mxGraphModel>
   </diagram>
   <diagram id="SvvWHTiUMNFuHuENcCa7" name="stride">
-    <mxGraphModel dx="1368" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1600" math="1" shadow="0">
+    <mxGraphModel dx="1609" dy="941" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1600" math="1" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />

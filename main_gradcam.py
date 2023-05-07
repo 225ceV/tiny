@@ -11,7 +11,7 @@ import cv2
 import models.global_var as global_var
 global_var._init()
 global_var.set_value("draw_gradcam", True)
-test = 'yolov5s'
+test = 'cbam'
 # Arguments
 parser = argparse.ArgumentParser()
 if test == "tph":
@@ -19,13 +19,13 @@ if test == "tph":
     parser.add_argument('--cfg', type=str, default='yolov5l-p2-tph', help='to get target-layer')
     parser.add_argument('--model-path', type=str, default="weights/wheat-det/tph.pt", help='Path to the model')
     parser.add_argument('--img-path', type=str, default='test_img/2fd875eaa.jpg', help='input image path')
-    parser.add_argument('--img-size', type=int, default=1024, help="input image size")
+    parser.add_argument('--img-size', type=int, default=640, help="input image size")
 if test == 'cbam':
     parser.add_argument('--data', type=str, default="wheat-det", help='to get cls name')
     parser.add_argument('--cfg', type=str, default='yolov5l-p2-cbam', help='to get target-layer')
     parser.add_argument('--model-path', type=str, default="weights/wheat-det/yolov5l-p2-cbam.pt", help='Path to the model')
     parser.add_argument('--img-path', type=str, default='test_img/2fd875eaa.jpg', help='input image path')
-    parser.add_argument('--img-size', type=int, default=1024, help="input image size")
+    parser.add_argument('--img-size', type=int, default=640, help="input image size")
 elif test == 'yolov5s':
     parser.add_argument('--data', type=str, default="coco", help='to get cls name')
     parser.add_argument('--cfg', type=str, default='yolov5s', help='to get target-layer')
@@ -91,7 +91,7 @@ elif args.cfg == 'yolov5l-p2':
     target_layers = ['model/21/cv3/act', 'model/24/cv3/act', 'model/27/cv3/act', 'model/30/cv3/act']
 elif args.cfg == 'yolov5l-p2-cbam':
     # 22, 26, 30, 34
-    target_layers = ['model/34/spatial_attention/sigmoid']
+    target_layers = ['model/26/spatial_attention/sigmoid']
     # target_layers = ['model/33/cv3/act']
 def get_res_img(mask, res_img):
     mask = mask.squeeze(0).mul(255).add_(0.5).clamp_(0, 255).permute(1, 2, 0).detach().cpu().numpy().astype(np.uint8)
